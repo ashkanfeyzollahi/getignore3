@@ -12,9 +12,11 @@ dependencies = ["requests (>=2.32.4,<3.0.0)", "appdirs (>=1.4.4,<2.0.0)"]
 [project.scripts]
 getignore = "getignore:getignore"
 
+[project.urls]
+repository = "https://github.com/ashkanfeyzollahi/getignore3"
+
 [tool.poetry]
 packages = [{ include = "getignore.py", from = "src" }]
-
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.12.5"
