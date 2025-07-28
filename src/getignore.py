@@ -26,7 +26,7 @@ argparser.add_argument(
     help="List available gitignore templates",
 )
 argparser.add_argument(
-    "-o",
+    "-w",
     "--override",
     action="store_true",
     help="Override existing gitignore file instead of appending",
@@ -58,7 +58,7 @@ def getignore() -> None:
 
     content_to_write = ""
 
-    if template_names is None:
+    if template_names == []:
         print("Nothing happened!")
         return
 
