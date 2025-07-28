@@ -45,13 +45,13 @@ argparser.add_argument(
     "-c",
     "--offline",
     action="store_true",
-    help="Get the cached gitignore template instead of downloading"
+    help="Get the cached gitignore template instead of downloading",
 )
 argparser.add_argument(
     "-o",
     "--output",
     default=".gitignore",
-    help="Where to write the gitignore template content to"
+    help="Where to write the gitignore template content to",
 )
 argparser.add_argument(
     "-w",
@@ -85,7 +85,8 @@ def getignore() -> None:
         cached_templates = [
             item
             for item in os.listdir(CACHE_DIR)
-            if item.endswith(".gitignore") and os.path.isfile(os.path.join(CACHE_DIR, item))
+            if item.endswith(".gitignore")
+            and os.path.isfile(os.path.join(CACHE_DIR, item))
         ]
 
         print("Cached gitignore templates:")
@@ -129,7 +130,9 @@ def getignore() -> None:
             if not args.no_cache:
                 with open(path_to_cache_file, "w") as cache_file:
                     cache_file.write(getignore_request.text)
-                print(f"Cached the {name!r} gitignore template at {path_to_cache_file!r}!")
+                print(
+                    f"Cached the {name!r} gitignore template at {path_to_cache_file!r}!"
+                )
 
     did_output_file_exist = os.path.exists(args.output)
 
