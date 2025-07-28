@@ -2,11 +2,15 @@
 Get gitignore files without bothering yourself
 """
 
+import appdirs
 import argparse
 import os
 import sys
 
 import requests
+
+
+CACHE_DIR = appdirs.user_cache_dir("getignore3")
 
 
 argparser = argparse.ArgumentParser(
@@ -20,10 +24,34 @@ argparser.add_argument(
     help="Name(s) of gitignore templates to fetch (e.g., Python, Node and etc.)",
 )
 argparser.add_argument(
+    "-L",
+    "--list-cached-templates",
+    action="store_true",
+    help="List cached gitignore templates",
+)
+argparser.add_argument(
     "-l",
     "--list-templates",
     action="store_true",
     help="List available gitignore templates",
+)
+argparser.add_argument(
+    "-n",
+    "--no-cache",
+    action="store_true",
+    help="Don't cache the gitignore template file when downloaded",
+)
+argparser.add_argument(
+    "-c",
+    "--offline",
+    action="store_true",
+    help="Get the cached gitignore template instead of downloading"
+)
+argparser.add_argument(
+    "-o",
+    "--output",
+    default=".gitignore",
+    help="Where to write the gitignore template content to"
 )
 argparser.add_argument(
     "-w",
@@ -51,8 +79,17 @@ def getignore() -> None:
         ]
 
         print("Available gitignore templates:")
-        print(", ".join(available_templates))
-        return
+        print(", ".join(available_templates), end="\n\n")
+
+    if args.list_cached_templates:
+        cached_templates = [
+            item
+            for item in os.listdir(CACHE_DIR)
+            if item.endswith(".gitignore") and os.path.isfile(os.path.join(CACHE_DIR, item))
+        ]
+
+        print("Cached gitignore templates:")
+        print(", ".join(cached_templates), end="\n\n")
 
     template_names = args.template_name
 
@@ -63,26 +100,43 @@ def getignore() -> None:
         return
 
     for name in template_names:
-        getignore_request = requests.get(
-            f"https://raw.githubusercontent.com/github/gitignore/main/{name}.gitignore"
-        )
+        path_to_cache_file = os.path.join(CACHE_DIR, f"{name}.gitignore")
 
-        if getignore_request.status_code >= 400:
-            print(
-                f"Error {getignore_request.status_code}, Couldn't get the gitignore template!",
-                file=sys.stderr,
+        if args.offline:
+            if not os.path.isfile(path_to_cache_file):
+                print(f"Couldn't find the {name!r} gitignore template! (offline)")
+                continue
+
+            with open(path_to_cache_file) as cache_file:
+                content_to_write += cache_file.read() + "\n"
+            print(f"Got the {name!r} gitignore template!")
+
+        else:
+            getignore_request = requests.get(
+                f"https://raw.githubusercontent.com/github/gitignore/main/{name}.gitignore"
             )
-            return
 
-        print(f"Got the {name!r} gitignore template!")
-        content_to_write += getignore_request.text + "\n"
+            if getignore_request.status_code >= 400:
+                print(
+                    f"Error {getignore_request.status_code}, Couldn't get the {name!r} gitignore template!",
+                    file=sys.stderr,
+                )
+                continue
 
-    didnt_gitignore_exist = not os.path.exists(".gitignore")
+            content_to_write += getignore_request.text + "\n"
+            print(f"Got the {name!r} gitignore template!")
 
-    with open(".gitignore", "w" if args.override else "a") as gitignore:
-        gitignore.write(content_to_write)
+            if not args.no_cache:
+                with open(path_to_cache_file, "w") as cache_file:
+                    cache_file.write(getignore_request.text)
+                print(f"Cached the {name!r} gitignore template at {path_to_cache_file!r}!")
 
-    if didnt_gitignore_exist:
+    did_output_file_exist = os.path.exists(args.output)
+
+    with open(args.output, "w" if args.override else "a") as output_file:
+        output_file.write(content_to_write)
+
+    if not did_output_file_exist:
         print("Created the gitignore file!")
 
     elif args.override:
