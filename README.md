@@ -3,7 +3,8 @@
 <p align="center">😎 Get gitignore files without bothering yourself</p>
 
 ```
-usage: getignore [-h] [-l] [-o] [template_name ...]
+usage: getignore [-h] [-L] [-l] [-n] [-c] [-o OUTPUT] [-w]
+                 [template_name ...]
 
 Get gitignore files without bothering yourself
 
@@ -13,8 +14,16 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
+  -L, --list-cached-templates
+                        List cached gitignore templates
   -l, --list-templates  List available gitignore templates
-  -o, --override        Override existing gitignore file instead of
+  -n, --no-cache        Don't cache the gitignore template file when
+                        downloaded
+  -c, --offline         Get the cached gitignore template instead of
+                        downloading
+  -o, --output OUTPUT   Where to write the gitignore template
+                        content to
+  -w, --override        Override existing gitignore file instead of
                         appending
 ```
 
