@@ -59,7 +59,7 @@ pipx install getignore3
 
 ```
 git clone https://github.com/ashkanfeyzollahi/getignore3.git
-cd getingore3
+cd getignore3
 python -m build
 pipx install dist/*
 ```
