@@ -1,5 +1,5 @@
 """
-Get gitignore files without bothering yourself
+A tool to fetch and manage `.gitignore` templates from GitHub with minimal effort
 """
 
 import appdirs
@@ -63,7 +63,7 @@ argparser.add_argument(
 
 def getignore() -> None:
     """
-    Get gitignore files without bothering yourself
+    A tool to fetch and manage `.gitignore` templates from GitHub with minimal effort
     """
 
     args = argparser.parse_args()
