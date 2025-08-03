@@ -7,7 +7,7 @@
     <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/getignore3">
 </p>
 
-getignore is a simple, no-fuss command-line tool for fetching .gitignore templates from the official GitHub gitignore repository. Whether you're starting a new project or tidying up an old one, getignore lets you easily grab the right .gitignore file for your stack — without digging through websites or typing out boilerplate.
+**getignore** is a simple, no-fuss command-line tool for fetching .gitignore templates from the official GitHub gitignore repository. Whether you're starting a new project or tidying up an old one, getignore lets you easily grab the right .gitignore file for your stack — without digging through websites or typing out boilerplate.
 
 ```
 usage: getignore [-h] [-L] [-l] [-n] [-c] [-o OUTPUT] [-w]
