@@ -1,6 +1,6 @@
 [project]
 name = "getignore3"
-version = "3.5.1"
+version = "3.5.2"
 description = "A tool to fetch and manage `.gitignore` templates from GitHub with minimal effort"
 authors = [
     { name = "ashkanfeyzollahi@gmail.com", email = "ashkanfeyzollahi@gmail.com" },
