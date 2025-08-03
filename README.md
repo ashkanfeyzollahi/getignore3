@@ -1,6 +1,12 @@
 # GetIgnore3
 
-<p align="center">😎 Get gitignore files without bothering yourself</p>
+<p align="center"><em>😎 Get gitignore files without bothering yourself</em>
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ashkanfeyzollahi/getignore3">
+    <img alt="GitHub License" src="https://img.shields.io/github/license/ashkanfeyzollahi/getignore3">
+    <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/getignore3">
+</p>
+
+getignore is a simple, no-fuss command-line tool for fetching .gitignore templates from the official GitHub gitignore repository. Whether you're starting a new project or tidying up an old one, getignore lets you easily grab the right .gitignore file for your stack — without digging through websites or typing out boilerplate.
 
 ```
 usage: getignore [-h] [-L] [-l] [-n] [-c] [-o OUTPUT] [-w]
@@ -29,22 +35,10 @@ options:
 
 ## Features
 
-1. **Template Retrieval:**
-
-   * Retrieves one or more .gitignore templates by name (e.g., Python, Node).
-   * Lists available .gitignore templates from an online repository.
-
-2. **Caching:**
-
-   * Stores downloaded .gitignore templates locally for reuse.
-   * Can retrieve templates in offline mode using the local cache.
-   * Option to skip caching of downloaded templates.
-   * Lists all locally cached .gitignore templates.
-
-3. **Multiple Templates Support:**
-
-   * Accepts multiple template names at once.
-   * Combines the content of all specified templates into a single output.
+* Automatically caches templates for offline use
+* Can list available and cached templates
+* Customizable output file location and behavior (append or overwrite)
+* Simple CLI with minimal setup
 
 ## Installation
 
