@@ -43,16 +43,23 @@ options:
 
 ## Installation
 
-- You either install it from `pypi` using `pip`:
+- You can install it from `pypi` using `pip` (for Microsoft Windows):
 
 ```bash
 pip install getignore3
 ```
 
-- Or directly install it from `github` using `pip`:
+- Or install it using `pipx` (recommended, for all):
 
 ```bash
-pip install git+https://github.com/ashkanfeyzollahi/getignore3.git
+pipx install getignore3
 ```
 
 - Or even build it from source!
+
+```
+git clone https://github.com/ashkanfeyzollahi/getignore3.git
+cd getingore3
+python -m build
+pipx install dist/*
+```
