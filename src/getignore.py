@@ -15,7 +15,7 @@ CACHE_DIR = appdirs.user_cache_dir("getignore3")
 
 argparser = argparse.ArgumentParser(
     prog="getignore",
-    description="Get gitignore files without bothering yourself",
+    description="A tool to fetch and manage `.gitignore` templates from GitHub with minimal effort",
 )
 
 argparser.add_argument(
