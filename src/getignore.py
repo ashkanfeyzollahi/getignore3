@@ -106,13 +106,14 @@ def getignore() -> None:
         if args.offline:
             if not os.path.isfile(path_to_cache_file):
                 print(f"Couldn't find the {name!r} gitignore template! (offline)")
-                continue
+                args.offline = False
 
-            with open(path_to_cache_file) as cache_file:
-                content_to_write += cache_file.read() + "\n"
-            print(f"Got the {name!r} gitignore template!")
+            if args.offline:
+                with open(path_to_cache_file) as cache_file:
+                    content_to_write += cache_file.read() + "\n"
+                print(f"Got the {name!r} gitignore template!")
 
-        else:
+        if not args.offline:
             getignore_request = requests.get(
                 f"https://raw.githubusercontent.com/github/gitignore/main/{name}.gitignore"
             )
