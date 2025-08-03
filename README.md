@@ -13,7 +13,7 @@
 usage: getignore [-h] [-L] [-l] [-n] [-c] [-o OUTPUT] [-w]
                  [template_name ...]
 
-Get gitignore files without bothering yourself
+A tool to fetch and manage `.gitignore` templates from GitHub with minimal effort
 
 positional arguments:
   template_name         Name(s) of gitignore templates to fetch
