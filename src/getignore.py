@@ -68,6 +68,9 @@ def getignore() -> None:
 
     args = argparser.parse_args()
 
+    if not os.path.exists(CACHE_DIR):
+        os.mkdir(CACHE_DIR)
+
     if args.list_templates:
         repository_contents = requests.get(
             "https://api.github.com/repos/github/gitignore/contents/"
